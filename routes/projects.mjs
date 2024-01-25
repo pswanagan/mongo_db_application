@@ -1,12 +1,11 @@
 import express from "express";
 import db from '../db/conn.mjs';
-import { ObjectId } from "mongodb";
+
 const router = express.Router();
 
 
 
-//BASE URL
-// localhost:5050/grades/
+
 
 router.get('/', async(req, res) => {
     const collection = await db.collection("projects");
@@ -14,7 +13,7 @@ router.get('/', async(req, res) => {
         const documents = await collection.find({}).toArray();
         return res.send(documents).status(202);
     } catch (error) {
-        console.error(`Error retrieving documents from ${collectionName}:`, err);
+        console.error(`Error retrieving documents from Projects:`, err);
         return [];
     }
 })
