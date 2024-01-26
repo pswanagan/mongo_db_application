@@ -18,3 +18,15 @@ router.get('/', async(req, res) => {
         return [];
     }
 })
+
+//Get a single task entry
+router.get('/:id', async (req, res) => {
+    let collection = await db.collection("tasks");
+    let query = {task_id: req.params.id}
+    let result = await collection.findOne(query);
+
+    if (!result) res.send("Not Found").status(404)
+    else res.send(result).status(202)
+})
+
+export default router;

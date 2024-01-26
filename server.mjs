@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/projects', projects);
 app.use('/tasks', tasks);
-app.use('employees', employees);
+app.use('/employees', employees);
 app.listen(PORT, () => {
     console.log("Server is running on port: " + PORT)
 });
