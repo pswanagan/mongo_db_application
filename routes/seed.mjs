@@ -3,7 +3,7 @@ import db from '../db/conn.mjs';
 
 const router = express.Router();
 
-const collectionNames = ['Usagi', 'Makoto', 'Endymion'];
+const collectionNames = ['employees', 'projects', 'tasks'];
 
 const data = [
     [{
