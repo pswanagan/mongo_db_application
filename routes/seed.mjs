@@ -503,6 +503,17 @@ router.get('/', async (req, res) => {
             
             await collection.deleteMany({});
             await collection.insertMany(data[index]);
+            
+            if (collectionName === 'employees') {
+
+                await collection.createIndex({ employee_id: 1 });
+            } else if (collectionName === 'projects') {
+
+                await collection.createIndex({ project_id: 1 });
+            } else if (collectionName === 'tasks') {
+
+                await collection.createIndex({ task_id: 1 });
+            }
         }
     
     res.status(200).send("Data Inserted")
