@@ -7,6 +7,7 @@ const router = express.Router();
 
 
 
+// Get the complete tasks collection
 
 router.get('/', async(req, res) => {
     const collection = await db.collection("tasks");
@@ -20,6 +21,7 @@ router.get('/', async(req, res) => {
 })
 
 //Get a single task entry
+
 router.get('/:id', async (req, res) => {
     let collection = await db.collection("tasks");
     let query = {task_id: req.params.id}
@@ -29,4 +31,13 @@ router.get('/:id', async (req, res) => {
     else res.send(result).status(202)
 })
 
+// Create a new task
+
+router.post('/', async (req, res) => {
+    let collection = await db.collection('tasks');
+    let newDocument = req.body;
+    let result = await collection.insertOne(newDocument);
+    if (!result) res.send('Bad Request').status(400);
+    else res.send(result).status(200);
+  });
 export default router;

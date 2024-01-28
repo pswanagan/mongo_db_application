@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 
+// Get the complete projects collections
 
 router.get('/', async(req, res) => {
     const collection = await db.collection("projects");
@@ -18,7 +19,8 @@ router.get('/', async(req, res) => {
     }
 })
 
-//Get a single employee entry
+//Get a project by project_id
+
 router.get('/:id', async (req, res) => {
     let collection = await db.collection("projects");
     let query = {project_id: req.params.id}
@@ -28,6 +30,15 @@ router.get('/:id', async (req, res) => {
     else res.send(result).status(202)
 })
 
+// Create a new project
+
+router.post('/', async (req, res) => {
+    let collection = await db.collection('projects');
+    let newDocument = req.body;
+    let result = await collection.insertOne(newDocument);
+    if (!result) res.send('Bad Request').status(400);
+    else res.send(result).status(200);
+  });
 
 
 export default router;
