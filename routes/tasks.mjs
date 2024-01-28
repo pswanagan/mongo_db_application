@@ -40,4 +40,16 @@ router.post('/', async (req, res) => {
     if (!result) res.send('Bad Request').status(400);
     else res.send(result).status(200);
   });
+
+    // Delete a task by task_id
+  
+router.delete('/:id', async (req, res) => {
+    let collection = await db.collection('tasks');
+    let query = { task_id: req.params.id };
+    let result = await collection.deleteOne(query);
+  
+    if (!result) res.send('Not found').status(404);
+    else res.send('Task has been deleted').status(200);
+  });
+
 export default router;

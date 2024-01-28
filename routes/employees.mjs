@@ -40,5 +40,16 @@ router.post('/', async (req, res) => {
     else res.send(result).status(200);
   });
 
+    // Delete an employee by employee_id
+  
+router.delete('/:id', async (req, res) => {
+    let collection = await db.collection('employees');
+    let query = { employee_id: req.params.id };
+    let result = await collection.deleteOne(query);
+  
+    if (!result) res.send('Not found').status(404);
+    else res.send('Employee has been deleted').status(200);
+  });
+
 
 export default router;

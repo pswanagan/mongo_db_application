@@ -40,5 +40,15 @@ router.post('/', async (req, res) => {
     else res.send(result).status(200);
   });
 
+  // Delete a project by project_id
+  
+router.delete('/:id', async (req, res) => {
+    let collection = await db.collection('projects');
+    let query = { project_id: req.params.id };
+    let result = await collection.deleteOne(query);
+  
+    if (!result) res.send('Not found').status(404);
+    else res.send('Project has been deleted').status(200);
+  });
 
 export default router;
